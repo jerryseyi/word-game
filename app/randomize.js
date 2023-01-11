@@ -26,8 +26,27 @@ class Randomize {
     display() {
         return this.results;
     }
+
+    word(items = this.results) {
+        let randomIndex;
+        let currentIndex = items.length; // 5
+
+        while (currentIndex !== 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+
+            [items[currentIndex], items[randomIndex]] = [items[randomIndex], items[currentIndex]];
+        }
+
+        return items;
+    }
 }
 
 rand = new Randomize();
 
-console.log(rand.consonant().vowel().display());
+console.log(rand.consonant().vowel());
+console.log(rand.word());
+console.log(rand.word());
+console.log(rand.word());
+console.log(rand.word());
+console.log(rand.word());
