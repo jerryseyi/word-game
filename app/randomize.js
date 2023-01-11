@@ -29,5 +29,5 @@ class Randomize {
 }
 
 rand = new Randomize();
-console.log(rand.consonant());
-console.log(rand.vowel());
+
+console.log(rand.consonant().vowel().display());
