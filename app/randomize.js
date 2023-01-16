@@ -1,4 +1,4 @@
-class Randomize {
+export class Randomize {
     vowels = ['a', 'e', 'i', 'o', 'u'];
     consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'];
     results = [];
@@ -32,21 +32,11 @@ class Randomize {
         let currentIndex = items.length; // 5
 
         while (currentIndex !== 0) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
+            randomIndex = Math.floor(Math.random() * currentIndex);  // 0 - 2 // 1
             currentIndex--;
-
             [items[currentIndex], items[randomIndex]] = [items[randomIndex], items[currentIndex]];
         }
 
         return items;
     }
 }
-
-rand = new Randomize();
-
-console.log(rand.consonant().vowel());
-console.log(rand.word());
-console.log(rand.word());
-console.log(rand.word());
-console.log(rand.word());
-console.log(rand.word());
