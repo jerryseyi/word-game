@@ -29,10 +29,10 @@ export class Randomize {
 
     word(items = this.results) {
         let randomIndex;
-        let currentIndex = items.length; // 5
+        let currentIndex = items.length;
 
         while (currentIndex !== 0) {
-            randomIndex = Math.floor(Math.random() * currentIndex);  // 0 - 2 // 1
+            randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex--;
             [items[currentIndex], items[randomIndex]] = [items[randomIndex], items[currentIndex]];
         }
