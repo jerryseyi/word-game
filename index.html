@@ -6,12 +6,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Word Game</title>
-    <link rel="stylesheet" href="../dist/main.css">
+    <link rel="stylesheet" href="dist/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <section class="absolute right-0 min-h-screen p-40 w-full bg-black-600 flex flex-start items-center ease-in duration-500">
-        <video src="image/scrabble.mp4" autoplay muted loop
+        <video src="app/image/scrabble.mp4" autoplay muted loop
                class="absolute top-0 left-0 w-full h-full object-cover">
         </video>
         <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-l from-deep-blue to-red mix-blend-overlay"></div>
@@ -22,9 +22,9 @@
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem consequuntur corporis cumque debitis delectus earum eius est facere illum ipsa ipsam ipsum laudantium, optio placeat qui quia suscipit veritatis voluptatem?
             </p>
             <a href="#" class="inline-block text-sm bg-white px-3 py-5 uppercase font-thin mt-5 text-black"
-               id="btn" onclick="modal()"
+               id="startBtn"
             >
-                Start Game</a>
+                Start</a>
         </div>
 
         <ul class="flex items-center justify-center absolute bottom-10">
@@ -37,50 +37,22 @@
     <section class="absolute top-0 left-0 bg-black-600 w-full h-full z-20 opacity-95 flex items-center hidden justify-center"
              id="form-section">
         <span class="absolute right-10 top-10 font-bold text-5xl cursor-pointer z-20 text-white"
-              id="close"
-              onclick="modal()"
+              id="closeBtn"
         >X</span>
         <form action="" class="absolute bg-white px-10 py-10 rounded-md">
             <div>
                 <input type="text"
                        class="border-2 border-gray rounded-md px-2 py-2 outline-none text-xs text-gray"
                         placeholder="Enter Your fullname"
+                       id="username"
                 >
-                <a href="#" class="bg-blue px-3 py-3 text-xs text-white font-light rounded-full">Submit</a>
+                <a href="#" class="bg-blue px-3 py-3 text-xs text-white font-light rounded-full" id="submitBtn">Submit</a>
             </div>
         </form>
     </section>
 
 
-    <script>
-        function modal() {
-            let form = document.getElementById('form-section');
-            form.classList.remove('hidden');
-        }
-
-
-    </script>
-<!--<script type="module">-->
-<!--    import {InputWord } from './js/inputword.js';-->
-<!--    import {Randomize} from "./js/randomize.js";-->
-
-<!--    let rand = new Randomize();-->
-<!--    let input = new InputWord();-->
-<!--    let values = rand.vowel().consonant().word();-->
-<!--    console.log(values);-->
-
-
-<!--    let game = document.getElementById('game');-->
-<!--    game.addEventListener('keypress', (event) => {-->
-<!--        event.preventDefault();-->
-<!--        if (input.isAlphabet(event.key) === true) {-->
-<!--            console.log(input.isFound(event.key, values))-->
-<!--            console.log(event.key);-->
-<!--        } else {-->
-
-<!--        }-->
-
-<!--    });-->
-<!--</script>-->
+    <script src="main.js" type="module"></script>
+    <script src="index.js"></script>
 </body>
 </html>
