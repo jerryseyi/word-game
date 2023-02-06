@@ -18,7 +18,7 @@ import {InputWord} from "./app/js/inputword.js";
     function submit() {
         if (username.value === '') return;
 
-        console.log(username.value);
+        localStorage.setItem('username', username.value);
         return location.href = 'play.html';
     }
 })();
