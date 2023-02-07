@@ -1,4 +1,4 @@
-import {InputWord} from "./app/js/inputword.js";
+import './app/css/app.css';
 
 (function () {
 
@@ -21,4 +21,5 @@ import {InputWord} from "./app/js/inputword.js";
         localStorage.setItem('username', username.value);
         return location.href = 'play.html';
     }
+
 })();
