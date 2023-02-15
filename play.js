@@ -1,4 +1,3 @@
-import './app/css/app.css';
 import {Randomize} from "./app/js/randomize.js";
 import {InputWord} from "./app/js/inputword.js";
 import axios from "axios";
@@ -9,10 +8,12 @@ import axios from "axios";
     let borderTime = document.getElementById('border-time');
     let spanWords = document.getElementById('words');
     let random = new Randomize().vowel().consonant().word();
-    let colors = ['white', 'blue', 'red'];
+    let colors = ['white', 'red', 'blue'];
     let inputKey = document.getElementById('input-key');
     let input = new InputWord();
     let enterBtn = document.getElementById('enter-btn');
+    let flash = document.getElementById('flash');
+    let refresh = document.getElementById('refresh');
 
     function startTimer(duration = 120, display) {
         let timer = duration;
@@ -31,10 +32,11 @@ import axios from "axios";
             display.textContent = minutes + ":" + seconds;
 
             if (timer < 30) {
-                borderTime.classList.add('border-2', 'border-red');
+                borderTime.classList.add('border-2', 'border-yellow');
             }
 
             if (--timer < 0) {
+                enterBtn.classList.add('cursor-not-allowed', 'opacity-70');
                 clearInterval(x);
             }
 
@@ -82,13 +84,33 @@ import axios from "axios";
 
         axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${inputKey.value}`)
             .then((res) => {
-                console.log(res.data);
                 input.valid.push(inputKey.value);
+                inputKey.value = '';
+                flash.classList.add('bg-blue');
+                flash.classList.remove('hidden');
+                fadeOut(1000);
             })
-            .catch((err) => console.log(err.response.data.title));
+            .catch((err) => {
+                flash.classList.add('bg-red');
+                flash.innerHTML = err.response.data.title;
+                flash.classList.remove('hidden');
+                fadeOut(1000);
+            });
 
         input.enteredKey = [];
     });
 
+    function fadeOut(seconds) {
+        setTimeout(() => {
+            flash.classList.add('hidden');
+        }, seconds);
+    }
 
+    refresh.addEventListener('click', (event) => {
+        new Randomize().word(random);
+        for (let i = spanWords.children.length - 1; i >= 0; i--) {
+            spanWords.children[i].remove();
+        }
+        populate();
+    });
 })()
