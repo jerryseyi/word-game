@@ -1,6 +1,7 @@
 import {Randomize} from "./app/js/randomize.js";
 import {InputWord} from "./app/js/inputword.js";
 import axios from "axios";
+import {AwardPoint} from "./app/js/awardpoint";
 
 (function () {
     let minutes = 120;
@@ -14,6 +15,8 @@ import axios from "axios";
     let enterBtn = document.getElementById('enter-btn');
     let flash = document.getElementById('flash');
     let refresh = document.getElementById('refresh');
+    let award = new AwardPoint();
+    let points = document.getElementById('points');
 
     function startTimer(duration = 120, display) {
         let timer = duration;
@@ -36,8 +39,12 @@ import axios from "axios";
             }
 
             if (--timer < 0) {
-                enterBtn.classList.add('cursor-not-allowed', 'opacity-70');
-                clearInterval(x);
+                newWords();
+                removeEl();
+                populate();
+                input.valid = [];
+                input.enteredKey = [];
+                timer = duration;
             }
 
         }, 1000);
@@ -85,6 +92,8 @@ import axios from "axios";
         axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${inputKey.value}`)
             .then((res) => {
                 input.valid.push(inputKey.value);
+                award.reward(inputKey.value.length);
+                points.innerHTML = award.total.toString();
                 inputKey.value = '';
                 flash.classList.add('bg-blue');
                 flash.classList.remove('hidden');
@@ -108,9 +117,20 @@ import axios from "axios";
 
     refresh.addEventListener('click', (event) => {
         new Randomize().word(random);
+        removeEl();
+        populate();
+    });
+
+    let removeEl = () => {
         for (let i = spanWords.children.length - 1; i >= 0; i--) {
             spanWords.children[i].remove();
         }
-        populate();
-    });
+    }
+
+    let newWords = () => {
+        random = new Randomize().vowel().consonant().word();
+
+        return populate();
+    }
+
 })()

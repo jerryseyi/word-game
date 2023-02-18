@@ -1,7 +1,7 @@
 export class InputWord {
 
     enteredKey = [];
-    valid = []
+    valid = [];
 
     isAlphabet(char) {
         return (/[a-zA-Z]/).test(char);
